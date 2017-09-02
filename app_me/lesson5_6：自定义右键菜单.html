@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 5_6</title>
+    <style>
+        body,
+        p,
+        ul,
+        li{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font: 12px/1.5 Tahoma;
+        }
+        p{
+            text-align: center;
+        }
+        #mymenu{
+            display: none;
+            position: absolute;
+            border: 1px solid #999;
+            border-radius: 2px;
+            list-style-type: none;
+            padding: 2px;/*白色内边距*/
+        }
+        #mymenu li a{
+            display: inline-block;/**设置a块级，宽高而不设置li***/
+            cursor: pointer;
+            text-align: left;
+            height: 24px;
+            width: 80px;
+            line-height: 24px;
+            text-decoration: none;
+            padding-left: 3px;
+            color: #333;
+            background: #FFF;
+        }
+        /*只设置了a的宽度不行，还要设置li为相同宽度！！li宽度会扩大！！*/
+        #mymenu li{
+            padding-left: 24px;
+            height: 24px;
+            vertical-align: top;/**设置为top，em和a就对齐了！！**/
+            position: relative;
+            background: #8CEE93;
+        }
+        #mymenu li em{
+            /**em设置为绝对定位？？**/
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 24px;
+            height:24px;
+            background: url(../src/images/ico.png) no-repeat;
+        }
+        #mymenu li em.first{
+            background-position: 0 0;
+        }
+        #mymenu li em.second{
+            background-position: 0 -24px;
+        }
+        #mymenu li em.third{
+            background-position: 0 -48px;
+        }
+        #mymenu li.mouseover a{
+            background: #3babe1;
+            color: #fff;
+        }
+        #mymenu li.mouseover{
+            background: #3babe1;
+      }
+    </style>
+</head>
+<body>
+    <p>自定义右键菜单，请在页面点击右键查看效果</p>
+    <ul id="mymenu">
+        <li><em class="first"></em><a href="javascript:;">剪贴</a></li><!----li中嵌套em和a元素！！---->
+        <li><em class="second"></em><a href="javascript:;">复制</a></li>
+        <li><em class="third"></em><a href="javascript:;">粘贴</a></li>
+    </ul>
+</body>
+<script>
+(function () {
+    let myMenu=document.getElementById('mymenu');
+    let item=myMenu.getElementsByTagName('li');
+
+
+    document.oncontextmenu=function (e) {
+        myMenu.style.display='block';
+        let X=e.clientX;
+        let Y=e.clientY;
+        myMenu.style.left=X+'px';//
+        myMenu.style.top=Y+'px';
+        return false;
+    };
+
+
+    //contextmenu事件右键覆盖click事件
+    document.addEventListener('click',function () {
+        myMenu.style.display='none';
+    },false);
+
+    for(let i=0;i<item.length;i++){
+        item[i].onmouseover=function () {
+          this.className='mouseover';
+        };
+        item[i].onmouseout=function () {
+          this.className=';'
+        };
+    }
+})();
+</script>
+</html>

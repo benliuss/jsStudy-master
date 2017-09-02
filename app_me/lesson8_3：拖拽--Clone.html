@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 8_3</title>
+  <style>
+    #box{
+      width: 100px;
+      height: 100px;
+      background: #00b1ff;
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      cursor: move;
+    }
+    .clone{
+      width: 100px;
+      height: 100px;
+      background: yellow;
+      position: absolute;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+<script>
+  (function () {
+  	let oDiv=document.getElementById('box');
+    let oClone=document.createElement('div');
+    let disX=0,disY=0;
+
+  	oDiv.onmousedown=function (event) {
+      disX=event.clientX-oDiv.offsetLeft;
+      disY=event.clientY-oDiv.offsetTop;
+
+      oClone.className='clone';
+      //oDiv.style.top||window.getComputedStyle(oDiv,null).top
+      oClone.style.left=oDiv.offsetLeft+'px';//
+      oClone.style.top=oDiv.offsetTop+'px';
+      document.body.appendChild(oClone);
+
+    };
+
+    oClone.onmousemove=function (event) {
+    	let X=event.clientX-disX;
+    	let Y=event.clientY-disY;
+    	let maxX=document.documentElement.clientWidth-this.offsetWidth;
+      let maxY=document.documentElement.clientHeight-this.offsetHeight;
+      X=(X>=maxX?maxX:X);
+      Y=(Y>=maxY?maxY:Y);
+      X=(X<=0?0:X);
+      Y=(Y<=0?0:Y);
+      oClone.style.left=X+'px';
+      oClone.style.top=Y+'px';
+    };
+
+    oClone.onmouseup=function (event) {
+      oDiv.style.left=oClone.offsetLeft+'px';
+      oDiv.style.top=oClone.offsetTop+'px';
+      document.body.removeChild(oClone);
+    }
+  })();
+</script>
+</body>
+</html>

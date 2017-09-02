@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 3_3</title>
+  <style>
+    body{
+      padding: 0;
+      text-align: center;
+      font: 14px Arial;
+    }
+    input{
+      padding: 2px;
+      margin: 5px;
+      width: 40px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" value="0" />
+</body>
+<script>
+  (function () {
+    var button=document.getElementsByTagName('input')[0];
+    var n=0;
+    button.onclick=function () {
+      button.value=++n;
+      alert(n);
+    }
+  })();
+</script>
+</html>

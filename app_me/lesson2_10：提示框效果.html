@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 2_10</title>
+  <style>
+    body{
+      font:12px/1.5 Tahoma;
+    }
+    #outer{
+      text-align: center;
+      width: 560px;
+      padding: 5px;
+      margin: 0 auto;
+      border: 1px solid black;
+    }
+    h1{
+      font-size: 24px;
+      padding: 0;
+      margin: 5px 10px 10px 10px;
+    }
+    #outer ul{
+      padding: 0;
+      margin: 0;
+      zoom: 1;
+      background: #000;
+    }
+    /*把ul设置为overflow:hidden，会遮挡绝对定位的图片超出ul的部分！*/
+    #outer ul:after{
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+    #outer ul li{
+      float: left;
+      padding: 15px;
+      margin: 5px;
+      width: 70px;
+      height: 70px;
+      background: #f0f0f0;
+      list-style-type: none;
+      position: relative;
+      border: 1px solid black;
+    }
+    #outer ul li strong{
+      display: block;
+    }
+    #outer ul li img{
+      position: absolute;
+      left: -14px;
+      top: -14px;
+      display: none;
+      border: 1px solid black;
+      /*绝对定位的图片被后面的li元素所覆盖！*/
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="outer">
+    <h1>名车车标展示-鼠标移过现实车标</h1>
+    <ul>
+      <li>
+        <strong>BMW</strong>宝马汽车
+        <img src="../src/images/1.jpg" alt="宝马" />
+      </li>
+      <li>
+        <strong>Alfa Romeo</strong>阿尔法 罗米欧
+        <img src="../src/images/2.jpg" alt="阿尔法 罗米欧" />
+      </li>
+      <li>
+        <strong>Skoda</strong>斯柯达
+        <img src="../src/images/3.jpg" alt="斯柯达" />
+      </li>
+      <li>
+        <strong>Volkswagen</strong>大众汽车
+        <img src="../src/images/4.jpg" alt="大众汽车" />
+      </li>
+      <li>
+        <strong>Saab</strong>萨布牌轿车
+        <img src="../src/images/5.jpg" alt="萨布牌轿车" />
+      </li>
+    </ul>
+      <!--设置了div宽度，不用列出两个ul列表！-->
+    <ul>
+      <li>
+        <strong>Lamborghini</strong>兰博基尼
+        <img src="../src/images/6.jpg" alt="兰博基尼" />
+      </li>
+      <li>
+        <strong>Porsche</strong>保时捷
+        <img src="../src/images/7.jpg" alt="保时捷" />
+      </li>
+      <li>
+        <strong>Peugeot</strong>标志
+        <img src="../src/images/8.jpg" alt="宝马" />
+      </li>
+      <li>
+        <strong>Mercedes</strong>梅赛德斯 奔驰
+        <img src="../src/images/9.jpg" alt="梅赛德斯 奔驰" />
+      </li>
+      <li>
+        <strong>Buick</strong>别克汽车
+        <img src="../src/images/1.jpg" alt="别克汽车" />
+      </li>
+    </ul>
+  </div>
+<script>
+  (function () {
+    var items=document.getElementsByTagName('li');
+    var images=document.getElementsByTagName('img');
+    for(var i=0;i<items.length;i++){
+        items[i].index=i;
+        items[i].addEventListener('mouseover',function () {
+          for(var j=0;j<images.length;j++){
+              images[j].style.display='none';
+          }
+          images[this.index].style.display='block';
+        },false);
+    }
+  })();
+</script>
+</body>
+</html>

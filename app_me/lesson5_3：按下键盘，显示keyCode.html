@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 5_3</title>
+    <style>
+        pre{
+            background: #0a0a0a;
+            color: #00b1ff;
+            border: 1px dotted #00b1ff;
+            padding: 10px 15px;
+            font: 12px/1.5 Courier New;
+        }
+        p{
+          text-align: center;
+          color: #FF6600;
+          font-size:30px;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+&lt;script type="text/javascript"&gt;
+window.onload = function (){
+    var oP = document.getElementsByTagName("p")[0];
+    document.onkeydown = function (event){
+        var event = event || window.event;
+        oP.innerHTML = event.keyCode;
+        return false
+    }
+}
+&lt/script&gt;
+    </pre>
+    <p>这里将显示您按下的keyCode</p>
+<script>
+(function () {
+    let oP=document.getElementsByTagName('p')[0];
+    document.addEventListener('keydown',function (event) {
+        var event=event||window.event;
+        oP.innerHTML=event.keyCode;
+        return false;//**
+    })
+})();
+</script>
+</body>
+</html>

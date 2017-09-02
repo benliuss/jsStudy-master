@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 2_7</title>
+    <style>
+      body,ul,li{
+        margin: 0;
+        padding: 0;
+        font: 12px/1.5 Tahoma;
+      }
+      #outer{
+        margin: 10px auto;
+        width: 400px;
+        background: #fff;
+        color: #000;
+        border: 1px solid #000;
+        height:400px;
+      }
+      #tab{
+        overflow: hidden;
+        width: 400px;
+        background: #000;
+        color: #fff;
+      }
+      #tab li{
+        padding: 3px 10px;
+        float: left;
+        border-bottom: 1px solid #000;
+        list-style-type: none;
+        cursor: pointer;
+      }
+      #classList ul li{
+        padding: 3px 5px;
+        list-style-position: inside;
+      }
+      #classList ul{
+        display:none;
+      }
+      #classList ul:first-child{
+        display: block;
+      }
+      .current{
+        background: #f0f0f0;
+        color: #000;
+      }
+    </style>
+</head>
+<body>
+    <div id="outer">
+
+      <ul id="tab">
+        <li class="current">第一课</li>
+        <li>第二课</li>
+        <li>第三课</li>
+      </ul>
+
+      <div id="classList">
+
+        <ul id="firstList">
+          <li>lesson1</li>
+          <li>lesson1</li>
+          <li>lesson1</li>
+          <li>lesson1</li>
+        </ul>
+        <ul id="secondList">
+          <li>lesson2</li>
+          <li>lesson2</li>
+          <li>lesson2</li>
+          <li>lesson2</li>
+          <li>lesson2</li>
+          <li>lesson2</li>
+        </ul>
+        <ul id="thirdList">
+          <li>lesson3</li>
+          <li>lesson3</li>
+        </ul>
+
+      </div>
+
+    </div>
+<script>
+  (function () {
+    var tabs=document.getElementById('tab').getElementsByTagName('li');
+    var classLists=document.getElementById('classList').getElementsByTagName('ul');
+
+    for(var i=0;i<tabs.length;i++){
+      tabs[i].index=i;
+      tabs[i].addEventListener('mouseover',function () {
+          //对classList
+          for(var j=0;j<classLists.length;j++){
+              classLists[j].style.display='none';
+          }
+          classLists[this.index].style.display='block';
+          //对tabs
+          for(var j=0;j<tabs.length;j++){
+              tabs[j].className='';
+          }
+          this.className='current';
+      },false);
+    }
+  })();
+</script>
+</body>
+</html>

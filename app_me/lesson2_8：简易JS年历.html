@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 2_8</title>
+    <style>
+      p,span{
+        margin: 0;
+        padding: 0;
+      }
+      #outer{
+        width: 231px;
+        height: 250px;
+        padding: 3px;
+        margin: 0 auto;
+        background: #03FAE5;
+        border:1px solid #131623;
+      }
+      #outer ul{
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      #outer li{
+        float: left;
+        margin: 3px;
+        width: 40px;
+        padding: 5px;
+        list-style-type: none;
+        border:1px solid #131623;
+        background: #6b7980;
+        text-align: center;
+        font-size: 15px;
+      }
+      #outer div{
+        margin: 3px;
+        width: auto;
+        height: 57px;
+        background: #4D90FE;
+        color: #2F5BB7;
+        padding: 5px 3px;
+        display: none;
+        line-height: 1.5;
+        font-size: 12px;
+
+      }
+      li span{
+        display: block;
+        font-weight: bold;
+        margin: 0 auto;
+        font-size: 20px;
+      }
+      #outer div p:first-child{
+        font-size: 15px;
+        font-weight: bold;
+      }
+      #outer li.current{
+        background: #FFFF00;
+        color:#fe791e;
+      }
+    </style>
+</head>
+<body>
+    <div id="outer">
+      <ul>
+        <li><span>1</span>JAN</li>
+        <li><span>2</span>FER</li>
+        <li><span>3</span>MAR</li>
+        <li><span>4</span>APR</li>
+      </ul>
+      <ul>
+        <li><span>5</span>MAY</li>
+        <li><span>6</span>JUN</li>
+        <li><span>7</span>JUL</li>
+        <li><span>8</span>AUG</li>
+      </ul>
+      <ul>
+        <li><span>9</span>SEP</li>
+        <li><span>10</span>OCT</li>
+        <li><span>11</span>NOV</li>
+        <li><span>12</span>DEC</li>
+      </ul>
+      <div>
+        <p>1月节日</p>
+        <p>元旦：1月1日至3日放三天假。</p>
+      </div>
+      <div>
+        <p>2月节日</p>
+        <p>春节：2月2日至8日放假7天。</p>
+      </div>
+      <div>
+        <p>3月节日</p>
+        <p>妇女节：3月8日妇女节。</p>
+      </div>
+      <div>
+        <p>4月节日</p>
+        <p>清明节：4月3日至5日放假3天。</p>
+      </div>
+      <div>
+        <p>5月节日</p>
+        <p>劳动节：4月30日至5月2日放假3天。</p>
+      </div>
+      <div>
+        <p>6月节日</p>
+        <p>端午节：6月4日至6日放假3天。</p>
+      </div>
+      <div>
+        <p>7月节日</p>
+        <p>7月7日小暑，不放假。</p>
+      </div>
+      <div>
+        <p>8月节日</p>
+        <p>七夕节：8月6日七夕节，不放假。</p>
+      </div>
+      <div>
+        <p>9月节日</p>
+        <p>中秋节：9月10日至12日放假3天。</p>
+      </div>
+      <div>
+        <p>10月节日</p>
+        <p>国庆节：10月1日至7日放假7天。</p>
+      </div>
+      <div>
+        <p>11月节日</p>
+        <p>立冬：11月8日立冬，不放假。</p>
+      </div>
+      <div>
+        <p>12月节日</p>
+        <p>艾滋病日：12月1日</p>
+        <p>废除奴隶制国际日：12月2日。</p>
+      </div>
+    </div>
+<script>
+  (function () {
+      var outerDiv=document.getElementById('outer');
+      var items=outerDiv.getElementsByTagName('li');
+      var decDivs=outerDiv.getElementsByTagName('div');
+      for(var i=0;i<items.length;i++){
+        items[i].index=i;
+        items[i].addEventListener('mouseover',function () {
+
+          for(var j=0;j<items.length;j++){
+            items[j].className='';
+          }
+          this.className='current';
+          for(var j=0;j<decDivs.length;j++){
+
+            decDivs[j].style.display='none';
+          }
+          decDivs[this.index].style.display='block';
+        },false);
+      }
+  })();
+</script>
+</body>
+</html>

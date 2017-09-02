@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 4_7</title>
+    <style>
+      body{
+        margin: 0;
+        padding:0;
+        background: #fff;
+      }
+      div{
+        font: 12px/1.5 Tahoma;
+        width: auto;
+        border: 1px dotted green;
+        color: green;
+        background: #f0f0f0;
+        padding: 10px;
+        margin: 5px;
+        overflow: auto;
+      }
+      input{
+        margin-left: 5px;
+      }
+    </style>
+</head>
+<body>
+    <div>
+      January(1),February(2),March(3),April(4),May(5),June(6),July(7),Aguest(8),September(9),October(10),November(11),December(12)
+    </div>
+    <input type="button" value="删除January(1)">
+    <input type="button" value="删除December(12)">
+    <div>
+        0,1,2,3,4,5,6,7,8,9
+    </div>
+    <input type="button" value="复制">
+    <input type="button" value="还原">
+    <div>
+      red,green,blue,white,yellow,black,brown
+    </div>
+    <input type="button" value="还原">
+    <input type="button" value="删除前三项">
+    <input type="button" value="删除第二至三项">
+    <input type="button" value="在第二项后插入(orange,purple)">
+    <input type="button" value="替换第二项和第三项">
+</body>
+<script>
+  (function () {
+      var oBody=document.getElementsByTagName('body')[0];
+      var aDiv=document.getElementsByTagName('div');
+      var array1 = aDiv[0].innerHTML.split(',');
+      var array2 = aDiv[1].innerHTML.split(',');
+      var array3 = aDiv[2].innerHTML.split(',');
+      oBody.addEventListener('click',function (event) {
+          event=event||window.event;
+          target=event.target||event.srcElement;
+          switch(target.value) {
+              case '删除January(1)':
+              case '还原January(1)':
+                  if (/January\(1\)/.test(array1)) {
+                      array1.shift();
+                      aDiv[0].innerHTML = array1;
+                      target.value = '还原January(1)';
+                  } else {
+                      array1.unshift('January(1)');
+                      aDiv[0].innerHTML = array1;
+                      target.value = '删除January(1)';
+                  }
+                  break;
+              case '删除December(12)':
+              case '还原December(12)':
+                  if (/December\(12\)/.test(array1)) {
+                      array1.pop();
+                      aDiv[0].innerHTML = array1;
+                      target.value = '还原December(12)';
+                  } else {
+                      array1.push('December(12)');
+                      aDiv[0].innerHTML = array1;
+                      target.value = '删除December(12)';
+                  }
+                  break;
+              case '复制':
+                  array2.push('0,1,2,3,4,5,6,7,8,9');
+                  aDiv[1].innerHTML=array2;
+                  break;
+              case '还原':
+                  array2=[0,1,2,3,4,5,6,7,8,9];
+                  aDiv[1].innerHTML=array2;
+                  array3=['red','green','blue','white','yellow','black','brown'];
+                  aDiv[2].innerHTML=array3;
+                  break;
+              case '删除前三项':
+                  array3.splice(0,3);
+                  aDiv[2].innerHTML=array3;
+                  break;
+              case '删除第二至三项':
+                  array3.splice(1,2);
+                  aDiv[2].innerHTML=array3;
+                  break;
+              case '在第二项后插入(orange,purple)':
+                  array3.splice(2,0,'orange','purple');
+                  aDiv[2].innerHTML=array3;
+                  break;
+              case '替换第二项和第三项':
+                  array3.splice(1,2,'#666','#333');
+                  aDiv[2].innerHTML=array3;
+                  break;
+          }
+      },false);
+
+  })();
+</script>
+</html>

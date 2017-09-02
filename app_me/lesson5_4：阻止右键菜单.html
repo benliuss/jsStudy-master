@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 5_4</title>
+    <style>
+        pre{
+            color: #00b1ff;
+            background: #0a0a0a;
+            border: 1px dotted #00b1ff;
+            padding: 10px 15px;
+            font: 12px/1.5 Courier New;
+        }
+        span{
+            color:#999;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+&lt;script type="text/javascript"&gt;
+<span>//※oncontextmenu</span>
+document.oncontextmenu = function (){
+    return false;
+}
+&lt;/script&gt;
+    </pre>
+<script>
+(function () {
+    document.oncontextmenu=function () {
+        return false;
+  };
+})();
+</script>
+</body>
+</html>

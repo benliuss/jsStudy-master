@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 4_5</title>
+    <style>
+      body{
+        background: #fff;
+        padding: 0;
+      }
+      div{
+        width: 400px;
+        height: 200px;
+        border: 1px solid #fe791e;
+        background: #fef4eb;
+        font:900 14px/1.5 Arial;
+        margin: 5px auto;
+        padding: 5px;
+        text-align: center;
+      }
+      span{
+        display: inline-block;
+        color: #fff;
+        background: #fe791e;
+        width:100px;
+        padding: 5px;
+        margin: 5px 10px;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+    <div>
+        <span>Get Style</span>
+        <span>Set Style</span>
+        <span>Default Style</span>
+    </div>
+</body>
+<script>
+  (function () {
+      function css(obj,attr,value) {
+          switch (arguments.length){
+              case 2:
+                  //两个参数，且第二参数是样式对象，批量设置属性
+                  if(typeof arguments[1]==='object'){
+                      //没写Var，错误！！
+                      for(var i in attr) {
+                        obj.style[i] = attr[i];
+                      }
+                  }else{
+                      //如果第二参数是字符串，读取属性值???????????
+                      return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,null)[attr];
+                  }
+                  break;
+              case 3:
+                  //单一设置属性
+                  obj.style[attr]=value;
+                  break;
+              default:
+                  alert('参数错误！');
+          }
+      }
+
+      var oDiv=document.getElementsByTagName('div')[0];
+      var aSpan=oDiv.getElementsByTagName('span');
+      aSpan[0].onclick=function () {
+          //传入两个参数，第二个为字符串
+          alert('width:'+css(oDiv,'width')+'\nheight:'+css(oDiv,'height')+'\nbackground-color:'+css(oDiv,'backgroundColor'));
+      };
+
+      aSpan[1].onclick=function () {
+          //传入两个参数，第二个为对象
+          css(oDiv, {
+              width: '440px',
+              height: '100px',
+              borderColor: '#0084ff',
+              backgroundColor: '#eff8ff'
+          });
+          //再传入三个参数，单一设置属性
+          for(i=0;i<aSpan.length;i++){
+              css(aSpan[i],'backgroundColor','#0084ff');
+          }
+      };
+
+      aSpan[2].onclick=function () {
+          css(oDiv,{
+              width:'400px',
+              height:'200px',
+              borderColor:'#f60',
+              backgroundColor:'#fef4eb'
+          });
+          for(i=0;i<aSpan.length;i++){
+              css(aSpan[i],'backgroundColor','#f60');
+          }
+      }
+  })();
+</script>
+</html>

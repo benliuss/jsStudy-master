@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 9_3</title>
+    <style>
+        body,
+        div{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 66px;
+            height: 48px;
+            background: url(../src/images/1.gif) no-repeat;
+        }
+        input,
+        p{
+            margin: 10px;
+        }
+        </style>
+    </head>
+    <body>
+        <input type="button" value="根据鼠标点击位置移动">
+        <input type="button" value="根据鼠标轨迹移动">
+        <p>请点击按钮激活功能！</p>
+        <div></div>
+    <script>
+    (function () {
+        let aBtn=document.getElementsByTagName('input');
+        let oP=document.getElementsByTagName('p')[0];
+        let oDiv=document.getElementsByTagName('div')[0];
+        let i=0;
+
+        aBtn[0].onclick=function (event) {
+            (event || window.event).cancelBubble = true;//
+            clearEvent();//
+            this.value += '(已激活)';
+            oP.innerHTML = '鼠标点击页面， 人物将移动至鼠标位置！';
+
+            document.onclick = function (event) {//之内
+            oDiv.style.background = 'url(../src/images/2.gif) no-repeat';
+            //
+            startMove(oDiv, {
+                x: (event || window.event).clientX,
+                y: (event || window.event).clientY
+            }, function () {
+            oDiv.style.background = 'url(../src/images/1.gif) no-repeat';
+            });
+            return false;//
+          };
+        };
+
+
+        aBtn[1].onclick=function (event) {
+            (event||window.event).cancelBubble=true;//
+            clearEvent();//
+            this.value+='(已激活)';
+            oP.innerHTML='按住鼠标左键，在页面滑动，人物将按鼠标轨迹移动';
+            let aPos=[{
+                x:oDiv.offsetLeft,//
+                y:oDiv.offsetTop
+            }];
+
+            //嵌套mousedown{mousemove},mouseup函数！！
+            document.onmousedown=function (event) {
+                aPos.push({
+                    x:(event||window.event).clientX,
+                    y:(event||window.event).clientY
+                });
+                document.onmousemove=function (event) {
+                    aPos.push({
+                        x:(event||window.event).clientX,
+                        y:(event||window.event).clientY
+                    });
+                    return false;//
+                };
+            };
+          return false//
+        };
+
+
+        document.onmouseup=function () {
+            document.onmousemove=null;//!!
+            //不必再计算L，T
+            oDiv.style.backgroundImage='url(../src/images/2.gif)';
+            let timer=setInterval(function () {
+                //
+                if(aPos.length===0){//若为零，重置！！
+                    clearInterval(timer);
+                    oDiv.style.backgroundImage='url(../src/images/1.gif)';
+                    return;//
+                }
+                oDiv.style.left=aPos[0].x+'px';
+                oDiv.style.top=aPos[0].y+'px';
+                aPos.shift();
+            },10);
+        };
+
+        function clearEvent() {
+            document.onclick=null;
+            document.onmousedown=null;
+            document.onmousemove=null;
+            document.onmouseup=null;
+
+            for(i=0;i<aBtn.length;i++){
+                aBtn[i].value=aBtn[i].value.replace('(已激活)','');
+                aBtn[i].onmousedown=aBtn[i].onmouseup=function (event) {//**
+                    (event||window.event).cancelBubble=true;
+                };
+            }
+        }
+
+        function startMove(obj,oTarget,fnEnd) {
+            clearInterval(obj.timer);//
+            obj.timer=setInterval(function () {
+                doMove(obj,oTarget,fnEnd);
+            },20);
+        }
+
+        function doMove(obj,oTarget,fnEnd) {
+            let iX=(oTarget.x-obj.offsetLeft)/10;
+            let iY=(oTarget.y-obj.offsetTop)/10;
+
+            iX=iX>0?Math.ceil(iX):Math.floor(iX);//
+            iY=iY>0?Math.ceil(iY):Math.floor(iY);
+            if(oTarget.x===obj.offsetLeft&&oTarget.y===obj.offsetTop){
+                clearInterval(obj.timer);
+                fnEnd&&fnEnd();
+            }else{
+                obj.style.left=obj.offsetLeft+iX+'px';
+                obj.style.top=obj.offsetTop+iY+'px';
+            }
+        }
+
+
+    })();
+</script>
+</body>
+</html>

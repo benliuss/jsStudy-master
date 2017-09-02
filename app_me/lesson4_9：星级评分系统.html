@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 4_9</title>
+    <style>
+      body,
+      div,
+      p,
+      span{
+        padding: 0;
+        margin: 0;
+      }
+      body{
+        background: #fff;
+        font: 12px Tahoma;
+        color: #404040;
+      }
+      #text{
+        display: inline-block;
+      }
+      span{
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        background: url("../src/images/star.png") no-repeat;
+        padding: 0;
+        margin: 3px;
+outline: #000 solid 1px;
+        vertical-align: middle;
+      }
+      span.on{
+        background-position: 0 -28px;
+      }
+      div{
+        position: absolute;
+        padding: 10px;
+        margin: 10px;
+        background: #f0f0f0;
+        width: 150px;
+        display: none;
+        border: 1px solid #404040;
+      }
+      div p{
+        color: #fe791e;
+      }
+      #first{
+        left: 50px;
+        top: 30px;
+      }
+      #second{
+        left: 100px;
+        top: 30px;
+      }
+      #third{
+        left: 150px;
+        top: 30px;
+      }
+      #fourth{
+        left: 200px;
+        top: 30px;
+      }
+      #fifth{
+        left: 250px;
+        top: 30px;
+      }
+    </style>
+</head>
+<body>
+    <p id="text">点击星星就能打分</p><span></span><span></span><span></span><span></span><span></span>
+    <div id="first"><p>1分</p>质量很差</div>
+    <div id="second"><p>2分</p>质量较差</div>
+    <div id="third"><p>3分</p>质量一般</div>
+    <div id="fourth"><p>4分</p>质量较好</div>
+    <div id="fifth"><p>5分</p>质量很好</div>
+</body>
+<script>
+(function () {
+    let aStar=document.getElementsByTagName('span');
+    let aDiv=document.getElementsByTagName('div');
+    let oBody=document.body;
+    let aArry=[
+        '1 分 (差得太离谱，与卖家描述的严重不符，非常不满)',
+        '2 分 (部分有破损，与卖家描述的不符，不满意)',
+        '3 分 (质量一般，没有卖家描述的那么好)',
+        '4 分 (质量不错，与卖家描述的基本一致，还是挺满意的)',
+        '5 分 (质量非常好，与卖家描述的完全一致，非常满意)'
+    ];
+
+    for(let i=0;i<aStar.length;i++){
+        aStar[i].index=i;
+        aStar[i].addEventListener('mouseover',function () {
+            for(let i=0;i<=this.index;i++){
+                aStar[i].style.backgroundPosition='0 -28px';//this指一个对象；aStar[i]指所有循环对象
+            }
+
+       /**对于调用mouseout方法，div框平滑，不闪
+        * for(let i=0;i<aDiv.length;i++){
+        * aDiv[i].style.display='none';
+        * }
+        */
+         aDiv[this.index].style.display='block';
+        },false);
+
+
+        aStar[i].addEventListener('mouseout',function () {
+
+            for(let i=this.index;i<aStar.length;i++){
+                aStar[i].style.backgroundPosition='0 0';
+            }
+
+            aDiv[this.index].style.display='none';
+        },false);
+
+        aStar[i].addEventListener('click',function () {
+
+            for(let i=0;i<aStar.length;i++){
+                aStar[i].className='';
+            }
+            for(let i=0;i<=this.index;i++){
+                aStar[i].className='on';
+            }
+        },false);
+    }
+  })();
+</script>
+</html>

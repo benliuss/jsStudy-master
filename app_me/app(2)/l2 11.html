@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>l2 11</title>
+    <style>
+      body,ul,li{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        background: #5bc0de;
+      }
+      img{
+        border: 0;
+        border-radius: 3px;
+      }
+      ul{
+        list-style-type: none;
+      }
+      #imgBox{
+        width: 212px;
+        border: 5px solid #fff;/**/
+        overflow: hidden;
+        zoom: 1;/**/
+        background: #fff;
+        border-radius: 3px;
+        margin: 10px auto;
+        padding: 0 0 3px 3px;
+      }
+      /*合一设置*/
+      #imgBox li,
+      #imgBox li img{
+        float: left;
+        width: 50px;
+        height: 50px;
+      }
+      #imgBox li{
+        margin: 3px 3px 0 0;
+      }
+      #imgBox li.imgShow{
+        position: relative;
+      }
+      /*合一设置*/
+      #imgBox li.imgShow,
+      #imgBox li.imgShow img{
+        width: 156px;
+        height: 156px;
+      }
+      /****/
+      #imgBox li.imgShow div{
+        position: absolute;/**/
+        top: 0;
+        left: 0;
+        width: 156px;
+        height: 156px;
+        display: none;/**/
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+        background: #fff url(../../src/images/loading.gif) 50% 50% no-repeat;
+      }
+    </style>
+</head>
+<body>
+   <ul id="imgBox">
+       <li class="imgShow"><img src="../../src/images/big_9.jpg">
+       <!--在li内添加了一个空div！！-->
+       <div></div>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_1.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_2.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_3.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_4.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_5.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_6.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_7.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_8.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_9.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_10.jpg"></a>
+       </li>
+       <li>
+           <a href="javascript:;"><img src="../../src/images/small_11.jpg"></a>
+       </li>
+   </ul>
+<script>
+(function () {
+    /**var bigImg=document.getElementById('big'); var bigSrc=bigImg.src
+    /* 不等于
+    /* var bigSrc=document.getElementById('big').src;
+    /* 前者是一个属性，后者只是一个字符串！！*/
+    let aImg=document.getElementsByTagName('img');//all img元素
+    let oLoadingDiv=document.getElementsByTagName('div')[0];
+
+    for(let i=1;i<aImg.length;i++){
+        aImg[i].addEventListener('mouseover',function () {
+            //创建了一个img对象！！
+            let img=new Image();
+            img.src=aImg[0].src=this.src.replace(/small/,'big');//改变图像路径
+
+            oLoadingDiv.style.display='block';
+            //图像是否加载完成？？?
+            img.complete?oLoadingDiv.style.display='none':(aImg[0].onload=function () {
+                oLoadingDiv.style.display='none';//在图象上调用onload事件
+            },false);
+        })
+    }
+})();
+</script>
+</body>
+</html>

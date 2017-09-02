@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 6_1</title>
+  <style>
+    html,body{
+      overflow: hidden;/***/
+    }
+    body,h2,p{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+      color: #fff;
+      background: #000;
+      font: 12px/1.5 Arial;
+    }
+    #box{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 150px;
+      border: 2px solid #fff;
+      margin: -75px 0 0 -150px;/**/
+      background: #4f4f4f;
+    }
+    h2{
+      cursor: move;/**/
+      font-size: 12px;
+      text-align: right;
+      border-bottom: 2px solid #fff;
+      background: #2b2b2b;
+      height: 20px;
+    }
+    h2 a{
+      text-decoration: none;
+      color: #fff;
+      line-height: 20px;
+      outline: none;/**/
+    }
+    p{
+      margin: 10px 10px 20px 10px;
+    }
+    span{
+      color:yellow;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <h2><a href="javascript:;">点击回放拖动轨迹</a></h2>
+    <p><strong>Drag:</strong><span></span></p>
+    <p><strong>offsetTop:</strong><span></span></p>
+    <p><strong>offsetLeft:</strong><span></span></p>
+  </div>
+<script>
+  (function () {
+    let oBox=document.getElementById('box');
+    let oH2=oBox.getElementsByTagName('h2')[0];
+    let oA=oH2.getElementsByTagName('a')[0];
+    let aSpan=oBox.getElementsByTagName('span');
+
+    let bDrag=false;
+    let disX=disY=0;
+    //储存了初始位置
+    let aPos=[{
+    	x:oBox.offsetLeft,
+      y:oBox.offsetTop
+    }];
+
+    //鼠标按下，激活
+    oH2.addEventListener('mousedown',function (event) {
+    	var event=event||window.event;//用var！！
+      bDrag=true;
+
+      disX=event.clientX-oBox.offsetLeft;
+      disY=event.clientY-oBox.offsetTop;
+
+      //储存了初始位置
+      aPos.push({
+        x:oBox.offsetLeft,
+        y:oBox.offsetTop
+      });
+
+      this.setCapture&&this.setCapture();//
+      return false;//
+    },false);
+
+    //拖拽开始
+    oH2.addEventListener('mousemove',function (event) {
+    	if(!bDrag) return;
+    	var event=event||window.event;
+
+    	let iL=event.clientX-disX;
+    	let iT=event.clientY-disY;
+    	let maxL=document.documentElement.clientWidth-oBox.offsetWidth;
+    	let maxT=document.documentElement.clientHeight-oBox.offsetHeight;
+
+    	//当移动div overflow时
+    	iL=iL<0?0:iL;
+    	iT=iT<0?0:iT;
+    	iL=iL>maxL?maxL:iL;
+    	iT=iT>maxT?maxT:iT;
+
+    	oBox.style.marginTop=oBox.style.marginLeft=0;
+      oBox.style.left=iL+'px';
+      oBox.style.top=iT+'px';
+
+      aPos.push({
+        x:iL,
+        y:iT
+      });
+
+      status();
+    },false);
+
+    //鼠标释放，拖拽结束
+    //****
+    document.onmouseup=window.onblur=oH2.onlosecapture=function () {
+      bDrag=false;
+      oH2.releaseCapture&&oH2.releaseCapture();//***
+      status();
+    };
+
+    //回放拖动轨迹
+    oA.addEventListener('click',function () {
+    	if(aPos.length===1) return;//
+
+      let timer=setInterval(function () {
+        let oPos=aPos.pop();
+        if(oPos){
+          oBox.style.left=oPos.x+'px';
+          oBox.style.top=oPos.y+'px';
+          status();
+        }else {
+          clearInterval(timer);
+        }
+      },10);
+
+      this.focus=false;//去除链接虚线
+
+      return false;//
+    },false);
+
+    //***阻止冒泡
+    oA.onmousedown=function (event) {
+      (event||window.event).cancelBubble=true;
+    };
+
+    //监听状态函数
+    function status() {
+      aSpan[0].innerHTML=bDrag;
+      aSpan[1].innerHTML=oBox.offsetTop;
+      aSpan[2].innerHTML=oBox.offsetLeft;
+    }
+    status();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>e4</title>
+    <style>
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video{
+        outline: green dotted 1px;
+      }
+      body{
+        height: 100vh;
+      }
+      /*伸缩滚动式div*/
+      .sidebar{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        overflow-y: auto;
+        background: #DAF1FF;
+        color: #333;
+        padding: 10px;
+      }
+      ul{
+        list-style: none outside none;
+        margin: 0;
+        padding: 0;
+      }
+      li{
+        margin: 0;
+        padding: 0 0 0 1.3em;
+        font-size: 14px;
+        white-space: nowrap;
+        position: relative;
+        /**/
+        line-height: 1.625;
+      }
+      .collapsed>ul{
+        display: none;
+      }
+      .expanded>ul{
+        display: block;
+      }
+      li a{
+        cursor: pointer;
+        display: block;
+        padding: 0 0.5em;
+        text-decoration: none;
+        color: #333;
+      }
+      li a:active{
+        background: #B03A5B;
+        color: #fff;
+      }
+      li a:hover{
+        background: rgba(176, 59, 91,0.25);
+        color: #000;
+      }
+      /*收起和张开*/
+      li.collapsed:before,
+      li.expanded:before{
+        content: '';
+        width: 6px;
+        height: 6px;
+        border: 1px solid #333;
+        border-top: none;
+        border-left: none;
+        position: absolute;
+        transform-origin: center;
+      }
+      li.collapsed:before{
+        transform: rotate(-45deg);
+        top: 7px;
+        left: 10px;
+      }
+      li.expanded:before{
+        transform: rotate(45deg);
+        top: 5px;
+        left: 10px;
+      }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul class="menu-tree">
+            <li data-level="1" class="collapsed"><a href="javascript:void(0);">Level 1</a>
+                <ul class="menu-tree">
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li data-level="1" class="collapsed"><a href="javascript:void(0);">Level 1</a>
+                <ul class="menu-tree">
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li data-level="1" class="collapsed"><a href="javascript:void(0);">Level 1</a>
+                <ul class="menu-tree">
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                      </ul>
+                    </li>
+                    <li data-level="2" class="collapsed"><a href="javascript:void(0);">Level 2</a>
+                        <ul class="menu-tree">
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<script>
+(function () {
+    let eleItems=document.querySelectorAll('li>a');//All <a>
+
+    for(let i=0;i<eleItems.length;i++){
+        eleItems[i].addEventListener('click',function () {
+            let hasClass=this.parentNode.classList.contains('collapsed');//item包含collapsed？
+            let hasUlEle=this.parentNode.getElementsByTagName('ul').length>0;//布尔值，1级item的length为2；2级为1；3级为0
+
+            //1或2级item
+            if(hasUlEle){
+                console.log(hasUlEle);
+                //1级
+                if(!hasClass){
+                    this.parentNode.classList.add('collapsed');
+                    this.parentNode.classList.remove('expanded');
+                }else{
+                    this.parentNode.classList.remove('collapsed');
+                    this.parentNode.classList.add('expanded');
+                }
+            }
+
+            //3级
+            return false;
+        },false);
+    }
+})();
+</script>
+</body>
+</html>

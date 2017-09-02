@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 3_4</title>
+  <style>
+    body{
+      padding: 0;
+      background: #fff;
+      color: #000;
+      font: 14px Arial;
+      text-align: center;
+    }
+    input{
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      padding: 2px;
+      margin: 5px 10px;
+      width: 80px;
+    }
+    .num{
+      width: 50px;
+    }
+    span{
+      color: red;
+      font-weight: 700;
+      padding: 0;
+      margin: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" class="num" /><strong>VS</strong><input type="text" class="num" />
+  <input type="button" value="最大数是>>" />
+  <span>?</span>
+</body>
+<script>
+  (function () {
+    var inputs=document.getElementsByTagName('input');
+    var max=document.getElementsByTagName('span')[0];
+    inputs[2].onclick=function () {
+      (inputs[0].value === '' || inputs[1].value === '' )? alert('请输入数字！') : (max.innerHTML = Math.max(inputs[0].value, inputs[1].value));
+    };
+    for(var i=0;i<inputs.length-1;i++){
+      inputs[i].onkeyup=function () {
+        this.value=this.value.replace(/[^\d]/,'');
+      }
+    }
+  })();
+</script>
+</html>

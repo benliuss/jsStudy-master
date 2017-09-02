@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lesson 4_2</title>
+	<style>
+		body,div,ul,li{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #1A1A1A;
+		}
+		#container{
+			width: 490px;
+			height: 170px;
+			background: #1A1A1A;
+			position: relative;
+			margin: 10px auto;
+			border: 3px solid #00b1ff;/**/
+			border-radius: 3px;
+		}
+	    ul{
+		    list-style-type: none;
+	    }
+	#container .imglist{
+	  position: relative;
+	}
+	#container ul.imglist li{
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  opacity: 0;/*li的透明度*/
+	  filter: alpha(opacity=0);
+	  cursor: pointer;
+	}
+	#container .countlist{
+	  position: absolute;
+	  top: 145px;
+	  left: 365px;
+	  list-style-type: none;
+	  overflow: hidden;
+	  cursor: pointer;
+
+	}
+	#container .countlist li{
+	  float: left;
+	  width: 20px;
+	  height: 20px;
+	  margin-right: 5px;
+	  border-radius: 7px;
+	  opacity: 0.5;
+	  filter: alpha(opacity=50);
+	  background: #00b1ff;
+	  color: #fff;
+	  text-align: center;
+	}
+	#container .countlist li.current,
+	#container .imglist li.current{
+	  opacity: 1;
+	  filter: alpha(opacity=100);
+	}
+  </style>
+</head>
+<body>
+  <div id="container">
+
+	<ul class="imglist">
+	  <li class="current"><img src="../src/images/01.jpg"></li>
+	  <li><img src="../src/images/02.jpg"></li>
+	  <li><img src="../src/images/03.jpg"></li>
+	  <li><img src="../src/images/04.jpg"></li>
+	  <li><img src="../src/images/05.jpg"></li>
+	</ul>
+
+	<ul class="countlist">
+	  <li class="current">1</li>
+	  <li>2</li>
+	  <li>3</li>
+	  <li>4</li>
+	  <li>5</li>
+	</ul>
+
+  </div>
+<script>
+(function () {
+  let container=document.getElementById('container');
+  let imgItems=container.getElementsByTagName('ul')[0].getElementsByTagName('li');
+  let countItems=container.getElementsByTagName('ul')[1].getElementsByTagName('li');
+  let index=i=0;//**
+  let timer=play=null;
+  let bOrder=true;//布尔值，播放顺序
+
+
+  autoPlay();
+  //自动播放函数
+  function autoPlay() {
+	play=setInterval(function () {
+	  //反复模式
+	  bOrder?index++:index--;
+
+	  index>=imgItems.length&&(index=imgItems.length-2,bOrder=false);
+	  index<=0&&(index=0,bOrder=true);
+
+	  //index>=imgItems.length&&(index=0);//加括号！！正常模式
+	  show(index);
+	},2000);
+  }
+
+  for(let i=0;i<countItems.length;i++){//无let，函数内i=5
+	countItems[i].addEventListener('mouseover',function () {
+	  show(i);
+	},false);
+  }
+
+  container.addEventListener('mouseover',function () {
+	clearInterval(play);
+  },false);
+  container.addEventListener('mouseout',function () {
+	autoPlay();
+  },false);
+
+
+  function show(a) {
+	index=a;
+
+	for(i=0;i<countItems.length;i++){//
+	  countItems[i].className='';
+	}
+	countItems[index].className='current';
+
+	clearInterval(timer);//**使上一个timer立即重置
+
+	for(i=0;i<imgItems.length;i++){
+	  imgItems[i].style.opacity=0;
+	  imgItems[i].style.filter='alpha(opacity=0)';
+	}
+	let alpha=0;//
+	timer=setInterval(function () {
+	  alpha+=2;//
+	  imgItems[index].style.opacity=alpha/100;
+	  imgItems[index].style.filter='alpha(opacity='+alpha+')';
+	  alpha===100&&clearInterval(timer);
+	},20);
+  }
+})();
+</script>
+</body>
+</html>

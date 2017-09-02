@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 2_12</title>
+</head>
+<body>
+  <dl>
+    <dt>
+      <input type="checkbox" id="cheakAll">
+      <label>全选</label>
+      <a href="javascript:;">反选</a>
+    </dt>
+    <dd>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（一）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（二）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（三）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（四）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（五）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（六）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（七）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（八）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（九）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（十）</label>
+      </p>
+    </dd>
+  </dl>
+  <p class="last">1、切换全选/全不选文字；2、根据选中个数更新全选框状态</p>
+<script>
+  (function () {
+    var checkAll=document.getElementById('checkAll');
+    var items=document.getElementsByName('item');
+    var label=document.getElementsByTagName('dt')[0].getElementsByTagName('label')[0];
+    checkAll.onclick=function () {
+      if(label.nodeValue==='全选'){
+          label.nodeValue='全不选';
+      }else{
+          label.nodeValue='全选';
+      }
+    }
+  })();
+</script>
+</body>
+</html>

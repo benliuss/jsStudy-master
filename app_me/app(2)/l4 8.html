@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>l4 8</title>
+    <style>
+      pre{
+        color: #5bc0de;
+        padding: 10px 15px;
+        background: #1A1A1A;
+        border: 1px dotted #5bc0de;
+        font: 12px/1.5 Courier New;
+      }
+    </style>
+</head>
+<body>
+    <pre>
+&lt;script&gt;
+var EventUtil = {
+    addHandler: function (oElement, sEvent, fnHandler) {
+        oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent("on" + sEvent, fnHandler);
+    },
+    removeHandler: function (oElement, sEvent, fnHandler) {
+        oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, false) : oElement.detachEvent("on" + sEvent, fnHandler);
+    },
+    addLoadHandler: function (fnHandler) {
+        this.addHandler(window, "load", fnHandler);
+    }
+}
+&lt;/script&gt;
+    </pre>
+    <input type="button" value="毫无用处的按钮">
+    <input type="button" value="绑定click">
+    <input type="button" value="解除绑定">
+<script>
+//添加、移除、windowOnload函数库
+let EventUtil={
+    addHandler:function (oEle,sEvent,fn) {
+      oEle.addEventListener?oEle.addEventListener(sEvent,fn,false):oEle.attachEvent('on'+sEvent,fn);
+    },
+    removeHandler:function (oEle,sEvent,fn) {
+        oEle.removeEventListener?oEle.removeEventListener(sEvent,fn,false):oEle.detachEvent('on'+sEvent,fn);
+    },
+    //
+    addLoadHandler:function (fn) {
+        this.addHandler(window,'load',fn)
+    },
+};
+
+EventUtil.addLoadHandler(function () {
+    let aBtn=document.getElementsByTagName('input');
+
+    //绑定
+    EventUtil.addHandler(aBtn[1],'click',function () {
+        aBtn[0].value='我可以点击了';
+        EventUtil.addHandler(aBtn[0],'click',fn);
+    });
+
+    //解绑
+    EventUtil.addHandler(aBtn[2],'click',function () {
+        aBtn[0].value='毫无用处的按钮';
+        EventUtil.removeHandler(aBtn[0],'click',fn);
+    });
+
+    function fn() {
+        alert('事件绑定成功！');
+    }
+})
+</script>
+</body>
+</html>

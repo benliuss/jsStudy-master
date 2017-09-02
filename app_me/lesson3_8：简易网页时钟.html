@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 3_8</title>
+    <style>
+      body{
+        color: #fff;
+        font: 18px/1.5 Arial;
+        padding: 0;
+        text-align: center;
+      }
+      #clock{
+        background: #0a0a0a;
+        width: 400px;
+        padding: 10px;
+        margin: 10px auto;
+      }
+      span{
+        display: inline-block;
+        width: 70px;
+        background: #fff;
+        color: #000;
+        padding: 2px;
+        margin: 10px;
+        border: 2px solid #9999aa;
+      }
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <span></span>点
+        <span></span>分
+        <span></span>秒
+    </div>
+<script>
+  (function () {
+      var oClock=document.getElementById('clock');
+      var aSpan=oClock.getElementsByTagName('span');
+
+      //
+      setInterval(getTime,1000);
+      getTime();
+
+      //创建Date对象，得到时分秒数组
+      function getTime() {
+          var oDate=new Date();
+          var aDate=[oDate.getHours(),oDate.getMinutes(),oDate.getSeconds()];
+
+          for(var i in aDate){
+              aSpan[i].innerHTML=format(aDate[i]);
+          }
+
+          //在单位数前加数字0
+          function format(a) {
+              return a.toString().replace(/^(\d)$/,'0$1');
+          }
+      }
+  })();
+</script>
+</body>
+</html>

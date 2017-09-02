@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 3_2</title>
+  <style>
+    body{
+      font: 12px/1.5 Arial;
+      text-align: center;
+      background: #fff;
+      color: #000;
+      padding: 0;
+    }
+    input{
+      background: #ccc;
+      border: 1px solid #f0f0f0;
+      margin: 5px 10px;
+      padding: 2px;
+    }
+    .f-text{
+      width: 70px;
+    }
+    strong{
+      padding: 0;
+      margin: 0;
+    }
+    span{
+      color: green;
+      font-weight: 700;
+      padding: 0;
+      margin: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" class="f-text" /><strong>+</strong>
+  <input type="text" class="f-text" /><strong>=</strong><span>?</span>
+  <input type="button" value="求和" />
+</body>
+<script>
+  (function () {
+    var inputs=document.getElementsByTagName('input');
+    //click求和
+    var sum=document.getElementsByTagName('span')[0];
+    inputs[2].addEventListener('click',function () {
+      //inputs[0].value是一个字符串！
+      (inputs[0].value===''||inputs[1].value==='')?alert('请输入数字！'):(sum.innerHTML=parseInt(inputs[0].value)+parseInt(inputs[1].value));
+    },false);
+
+    //检验数字输入
+    for(var i=0;i<inputs.length-1;i++){
+        inputs[i].addEventListener('keyup',function () {
+          //不是this.value.replace();！
+          this.value=this.value.replace(/[^\d]/,'');
+        },false);
+    }
+  })();
+</script>
+</html>

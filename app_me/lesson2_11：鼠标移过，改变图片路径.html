@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 2_11</title>
+  <style>
+    body{
+      padding: 0;
+      margin: 0;
+      background: #9999aa;
+    }
+    #outer{
+      width: 256px;
+      padding: 2px;
+      margin: 10px auto;
+      background: #0a0a0a;
+      overflow: hidden;
+      border-radius: 4px;
+      zoom: 1;
+      position: relative;
+    }
+    #big,.small{
+      float: left;
+      padding: 0;
+      margin: 2px;
+    }
+    img{
+      border-radius: 2px;
+    }
+    /*绝对定位div，设置载入中图片*/
+    #outer div{
+      margin: 4px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 188px;
+      height: 188px;
+      display: none;
+      opacity: 0.5;
+      filter: alpha(opacity=50);
+      background: #fff url(../src/images/loading.gif) 50% 50% no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div id="outer">
+    <img id="big" src="../src/images/big_1.jpg" width="188" height="188" alt="" />
+    <img class="small" src="../src/images/small_1.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_2.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_3.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_4.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_5.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_6.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_7.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_8.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_9.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_10.jpg" width="60" height="60" alt="" />
+    <img class="small" src="../src/images/small_11.jpg" width="60" height="60" alt="" />
+  </div>
+<script>
+  (function () {
+    /**var bigImg=document.getElementById('big'); var bigSrc=bigImg.src
+    /* 不等于
+    /* var bigSrc=document.getElementById('big').src;
+    /* 前者是一个属性，后者只是一个字符串！！*/
+    var bigImg=document.getElementById('big');
+    var smallImgs=document.getElementsByClassName('small');
+    var div=document.createElement('div');
+    smallImgs[0].parentNode.insertBefore(div,smallImgs[1]);
+    for(var i=0;i<smallImgs.length;i++){
+        smallImgs[i].addEventListener('mouseover',function () {
+          //创建了一个Image对象
+          var img=new Image();
+          img.src=bigImg.src=this.src.replace(/small/, "big");
+          div.style.display='block';
+          //**图片加载是否完成
+          img.complete?div.style.display='none':(bigImg.onload=function () {
+            div.style.display='none';
+          });
+        },false);
+    }
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 2_9</title>
+    <style>
+      #outer{
+        margin: 0 auto;
+        width:300px;
+        cursor: pointer;
+      }
+      #list{
+        display:block;
+      }
+      li.current{
+        background: #FFFF00;
+      }
+    </style>
+</head>
+<body>
+  <div id="outer">
+    <div id="button">播放列表</div>
+    <ul id="list">
+      <li>11/li>
+      <li>2222wer222</li>
+      <li>3333333</li>
+      <li>342</li>
+      <li>dasadasasdas</li>
+      <li>24</li>
+      <li>999999999</li>
+      <li>tomyhdasd</li>
+    </ul>
+  </div>
+<script>
+  (function () {
+    var button=document.getElementById('button');
+    var list=document.getElementById('list');
+    var items=list.getElementsByTagName('li');
+    button.addEventListener('click',function () {
+      list.style.display=(list.style.display==='none'?'block':'none');
+    },false);
+
+    for(var i=0;i<items.length;i++){
+        items[i].addEventListener('mouseover',function () {
+          for(var i=0;i<items.length;i++) {
+            if (items[i].classList.contains('current')) {
+                items[i].classList.remove('current');
+            }
+            this.classList.add('current');
+          }
+        },false);
+    }
+  })();
+</script>
+</body>
+</html>

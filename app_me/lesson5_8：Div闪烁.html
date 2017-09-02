@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 5_8</title>
+    <style>
+        div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: #00b1ff;
+            color: #FF6600;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;/*绝对定位配合半负外边距翻折，达到居中效果*/
+            text-align: center;
+            letter-spacing: 5px;/**/
+            font: 12px/150px Arial;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>点 击 我 就 闪</div>
+<script>
+(function () {
+    let oDiv=document.getElementsByTagName('div')[0];
+    let timer=null;
+
+    oDiv.onclick=function () {
+        let i = 0;
+
+        clearInterval(timer);//先重置
+
+        timer = setInterval(function () {
+            oDiv.style.display = i++ % 2 ? 'none' : 'block';//**** i++%2
+            i > 6 && (clearInterval(timer));//用&&选择调用
+        }, 80);
+  }
+})();
+</script>
+</body>
+</html>

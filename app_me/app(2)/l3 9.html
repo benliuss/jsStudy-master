@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>l3 9</title>
+    <style>
+      body,
+      div{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        color: #fff;
+        font: 16px/1.5 \5fae\8f6f\96c5\9ed1;
+      }
+      #countdown{
+        width: 300px;
+        text-align: center;
+        background: #1a1a1a;
+        margin: 10px auto;
+        padding: 20px 0;
+      }
+      span{
+        color: #000;
+        line-height: 2;
+        background: #FBFBFB;
+        border: 2px solid #b4b4b4;
+        margin: 0 10px;
+        padding: 0 10px;/*内边距设置其宽高*/
+      }
+      input{
+        border: 0;
+        width: 283px;
+        height: 50px;
+        cursor: pointer;
+        margin-top: 20px;
+        background: url(../../src/images/btn-1.png) no-repeat;
+      }
+      input.cancel{
+        background-position: 0 -50px;
+      }
+    </style>
+</head>
+<body>
+    <div id="countdown">
+        <span>01</span>分钟<span>40</span>秒
+        <input type="button" value="">
+    </div>
+</body>
+<script>
+(function () {
+    let oCountDown=document.getElementById('countdown');
+    let aInput=document.getElementsByTagName('input')[0];
+
+    let timer=null;//**
+
+
+    aInput.addEventListener('click',function () {
+        //根据className空否调用或暂停updateTime()
+        this.className===''?timer=setInterval(updateTime,1000):clearInterval(timer);
+        //根据className空否设置className
+        this.className=this.className===''?'cancel':'';
+    },false);
+
+
+    function updateTime() {
+        let aSpan=oCountDown.getElementsByTagName('span');
+        //求得总秒数
+        let oRemain=aSpan[0].innerHTML.replace(/^0/,'')*60+parseInt(aSpan[1].innerHTML.replace(/^0/,''));
+
+        //
+        if(oRemain<=0){
+            clearInterval(timer);
+            return;
+        }
+
+        oRemain--;
+        aSpan[0].innerHTML=format(parseInt(oRemain/60));
+        oRemain%=60;
+        aSpan[1].innerHTML=format(parseInt(oRemain));
+    }
+
+    //单位数前加零
+    function format(num) {
+        return num.toString().replace(/^(\d)$/,'0$1');
+    }
+})();
+</script>
+</html>

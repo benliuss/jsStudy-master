@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson 5_1</title>
+    <style>
+        pre{
+            padding: 10px;
+            background: #1A1A1A;
+            color: #3babe1;
+            border: 1px dotted #3babe1;
+            font: 12px/1.5 Courier New;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+&lt;script&gt;
+var event=event||window.event;
+alert('坐标：['+event.clientX+','+event.clientY+']');
+&lt;/script&gt;
+    </pre>
+<script>
+(function () {
+    //使用let无效！！
+    document.addEventListener('click',function (event) {
+        var event=event||window.event;
+        alert("坐标：[" + event.clientX + ", " + event.clientY + "]");
+    },false);
+})();
+</script>
+</body>
+</html>

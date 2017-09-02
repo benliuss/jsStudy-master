@@ -1,0 +1,121 @@
+<!DOCTYPE html> <html lang="en">
+<head>
+    <meta charset="UTF-8">
+		<title>e2</title>
+    <style>
+			body{
+				height: 100vh;
+				background: #f5f5f5; }
+
+			.container{
+				margin: 20px auto;
+				width: 50vw;
+			}
+			form{
+				background: #fefefe;
+				padding: 10px;
+				display: inline-block;
+				border-radius: 3px;
+				margin-bottom: 15px;
+			}
+			form input{
+				border: 1px solid #ccc;
+				padding: 10px 15px;
+				border-radius: 4px;
+				background: #fff;
+				font-size: 14px;
+				color: #333;
+				margin: 0 5px;
+			}
+			form input:focus{
+				border-color: rgba(37,162,222,0.8);
+				box-shadow: 0 0 5px rgba(37,162,222,0.5);
+				outline: none;
+			}
+			form .btn{
+				border: 1px solid #1f93cb;
+				background: #1f93cb;
+				color: #fff;
+				padding: 10px 15px;
+				border-radius: 4px;
+				font-size: 14px;
+			}
+			ul{
+				list-style: none outside none;
+				display: -webkit-flex;
+				display: flex;//弹性盒
+				-webkit-box-pack: start;
+				-webkit-flex-flow: wrap;
+				justify-content: start;//主轴对齐方式
+				-webkit-flex-flow: wrap;
+				flex-flow: wrap;//超行排列方式
+				margin: 0;
+				padding: 0;
+			}
+      ul li{
+        margin: 5px;
+        background: #3babe1;
+        color: #fff;
+        padding: 5px 8px 5px 5px;
+        font-size: 14px;
+        line-height: 1;
+        border-radius: 3px;
+        position: relative;
+        cursor: pointer;
+      }
+      ul li:before{
+        content: '\2297';/*符号中心点偏右*/
+        font-size: 20px;
+        position: absolute;
+        font-family: Arial;
+        right: -8px;
+        top: -8px;
+        background: #3babe1;
+        line-height: 12px;
+        padding: 2px;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        text-align: center;
+      }
+		</style>
+</head>
+<body>
+		<div class="container">
+				<form class="add-item" method="post" action="#">
+						<label for="newitem">添加标签：</label>
+						<input type="text" name="newitem" id="newitem" placeholder="添加需要的标签 required">
+						<button type="submit" class="btn">添加</button>
+				</form>
+				<ul class="item" id="todolist">
+				</ul>
+		</div>
+</body>
+<script>
+(function () {
+		let list=document.querySelector('#todolist');//ul
+		let form=document.querySelector('.add-item');//form
+		let field=document.querySelector('#newitem');//input
+
+		//form元素上侦听submit事件
+		form.addEventListener('submit',function (e) {
+				let text=field.value;
+				if(text!==''){
+						list.innerHTML+='<li>'+text+'</li>';
+						field.value='';
+						field.focus();
+				}
+				e.preventDefault();
+		},false);
+
+		//list元素上侦听click事件
+		list.addEventListener('click',function (e) {
+				let t=e.target;//取得事件目标
+				if(t.tagName==='LI'){
+						t.parentNode.removeChild(t);
+				}
+
+		},false);    e.preventDefault();
+})();
+</script>
+</html>

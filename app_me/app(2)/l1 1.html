@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>l1</title>
+    <style>
+      #container{
+        width: 500px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+      }
+      #test{
+        width: 100px;
+        height: 100px;
+        background: #5bc0de;
+        margin: 10px auto;
+      }
+  </style>
+</head>
+<body>
+    <div id="container">
+        <input type="button" value="变宽">
+        <input type="button" value="变高">
+        <input type="button" value="变色">
+        <input type="button" value="隐藏">
+        <input type="button" value="重置">
+        <div id="test">
+        </div>
+    </div>
+<script>
+(function () {
+    //changeStyle函数
+    function changeStyle(elem,attr,value) {
+        elem.style[attr]=value;
+    }
+
+    let aBtn=document.getElementsByTagName('input');
+    let oDiv=document.getElementById('test');
+
+    let aAtt=['width','height','background','display','display'];
+    let aVal=['200px','200px','#fe791e','none','block'];
+
+    for(let i=0;i<aBtn.length;i++){
+        aBtn[i].index=i;//用index属性保存每次循环i的值，此处用let，不用此法也可
+        aBtn[i].addEventListener('click',function () {
+            //用&&关系选择性地重置css！！
+            this.index===aBtn.length-1&&(oDiv.style.cssText='');
+            changeStyle(oDiv,aAtt[this.index],aVal[this.index]);
+        },false);
+    }
+})();
+</script>
+</body>
+</html>

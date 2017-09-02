@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>l2 11</title>
+    <style>
+      body,div,h2,ul,li{
+        margin: 0;
+        padding:0;
+      }
+      body{
+        font: 12px/1.5 Tahoma;
+      }
+      ul{
+        list-style-type: none;
+      }
+      #container{
+        width: 560px;
+        border: 1px solid #333;
+        margin: 10px auto;
+        padding: 0 0 10px 10px;
+      }
+      #container h2{
+        text-align: center;
+        line-height: 30px;
+        margin-top: 10px;
+      }
+      ul{
+
+      }
+      /**设置清除浮动，若用overflow: hidden，绝对定位的img仍会被div覆盖**/
+      #container ul:after{
+        content: '.';
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;/*元素是否可见*/
+      }
+      #container ul{
+        zoom: 1;
+      }
+      #container ul li{
+        position: relative;
+        float: left;
+        border: 1px solid #333;
+        margin: 10px 10px 0 0;
+        display: inline;/**/
+      }
+      #container ul li img{
+        position: absolute;
+        top: -14px;
+        left: -14px;
+        display: none;
+        border: 2px solid #999;
+        cursor: pointer;
+      }
+      #container ul li a{
+        color: #666;
+        display: block;/*设置<a>为block和宽度作为item的宽度*/
+        width: 80px;
+        height: 80px;
+        background: #f0f0f0;
+        text-decoration: none;
+        padding: 10px;
+      }
+      #container ul li a strong{
+        display: block;
+      }
+      .zindex{
+        z-index: 1;/*被后items覆盖*/
+      }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>名车车标展示-鼠标移过显示车标</h2>
+        <ul>
+            <li>
+                <a href="javascript:;" title="宝马汽车"><strong>BMW</strong>宝马汽车</a>
+                <img src="../../src/images/1.jpg" alt="宝马汽车">
+            </li>
+            <li>
+                <a href="javascript:;" title="阿尔法-罗米欧"><strong>Alfa Romeo</strong>阿尔法-罗米欧</a>
+                <img src="../../src/images/2.jpg" alt="阿尔法-罗米欧">
+            </li>
+            <li>
+                <a href="javascript:;" title="Skoda 斯柯达"><strong>Skoda</strong> 斯柯达</a>
+                <img src="../../src/images/3.jpg" alt="Skoda 斯柯达">
+            </li>
+            <li>
+                <a href="javascript:;" title="Volkswagen 大众汽车"><strong>Volkswagen</strong> 大众汽车</a>
+                <img src="../../src/images/4.jpg" alt="Volkswagen 大众汽车">
+            </li>
+            <li>
+                <a href="javascript:;" title="Saab 萨布牌轿"><strong>Saab</strong> 萨布牌轿车</a>
+                <img src="../../src/images/5.jpg" alt="Saab 萨布牌轿">
+            </li>
+            <!--设置了div宽度，不用列出两个ul列表！-->
+            <li>
+                <a href="javascript:;" title="Lamborghini 兰博基尼"><strong>Lamborghini</strong> 兰博基尼</a>
+                <img src="../../src/images/6.jpg" alt="Lamborghini 兰博基尼">
+            </li>
+            <li>
+                <a href="javascript:;" title="Porsche 保时捷"><strong>Porsche</strong> 保时捷</a>
+                <img src="../../src/images/7.jpg" alt="Porsche 保时捷">
+            </li>
+            <li>
+                <a href="javascript:;" title="Peugeot 标致"><strong>Peugeot</strong> 标致</a>
+                <img src="../../src/images/8.jpg" alt="Peugeot 标致">
+            </li>
+            <li>
+                <a href="javascript:;" title="Mercedes1 梅赛德斯 奔驰"><strong>Mercedes1</strong> 梅赛德斯 奔驰</a>
+                <img src="../../src/images/9.jpg" alt="Mercedes1 梅赛德斯 奔驰">
+            </li>
+            <li>
+                <a href="javascript:;" title="Buick 别克汽车"><strong>Buick</strong> 别克汽车</a>
+                <img src="../../src/images/10.jpg" alt="Buick 别克汽车">
+            </li>
+        </ul>
+    </div>
+<script>
+(function() {
+    let aLi = document.getElementsByTagName("li");
+    let aImg = document.getElementsByTagName("img");
+    for (let i = 0; i < aLi.length; i++) {
+        aLi[i].index = i;
+        aLi[i].addEventListener('mouseover',function () {
+            this.className = "zindex";
+            aImg[this.index].style.display = "block";
+        },false);
+        aLi[i].addEventListener('mouseout',function () {
+            this.className = "";
+            aImg[this.index].style.display = "none";
+        },false);
+    }
+})();
+</script>
+</body>
+</html>

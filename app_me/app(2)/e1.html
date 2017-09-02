@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>e1</title>
+    <style>
+      body{
+        height: 100vh;/*视口均分为100单位的vh*/
+        display: flex;
+        justify-content: center;/*纵向对齐方式*/
+        align-items: center;/*横向对齐方式*/
+      }
+      ul{
+        list-style: none outside none;
+        margin: 2em;
+        display: flex;
+        flex-flow: wrap;/*换行，第一行在上方*/
+      }
+      ul li{
+        margin: 5px;
+        padding: 1rem 3rem;/*相对于<html>*/
+        border: 1px solid #ccc;
+        background: #fefefe;
+      }
+      div{
+        padding: 0 3rem;
+        flex: 1 1 20rem;/*若空间有余，项目放大比例、空间不足，缩小比例、占据主轴空间*/
+        position: relative;
+      }
+      div span{
+        position: absolute;
+        padding: 20px;
+        background: #f33;
+        color: #fff;
+        border-radius: 100%;
+        line-height: 1;
+        font-family: Arial;
+        font-size: 2em;
+        text-align: center;
+        box-sizing: padding-box;/*padding计算入width内*/
+      }
+      /**/
+      div span:after{
+        content: '';
+        display: inline-block;
+        height: 0;
+        width: 0;
+        padding-top: 100%;
+        vertical-align: middle;
+      }
+      @keyframes scale {
+        0%{
+          transform: scale(1,1);
+        }
+        50%{
+          transform: scale(1.1,1.1);
+        }
+        100%{
+          transform: scale(1,1);
+        }
+      }
+      ul li.selected{
+        background: #a99;
+        color: #fff;
+      }
+      div span.active{
+        animation: scale .28s ease both;
+      }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+        <li>item4</li>
+        <li>item5</li>
+        <li>item6</li>
+        <li>item7</li>
+        <li>item8</li>
+        <li>item9</li>
+        <li>item10</li>
+        <li>item11</li>
+        <li>item12</li>
+    </ul>
+    <div>你的选择数：<span>0</span></div>
+</body>
+<script>
+(function () {
+    let aLiEle=document.querySelectorAll('li');//所有items
+    let numEle=document.querySelector('span');//span元素
+
+    for(let i=0;i<aLiEle.length;i++){
+        aLiEle[i].addEventListener('click',function () {
+            let hasClass=this.classList.contains('selected');//是否包含selected
+            changeSpanClass();
+
+            if(!hasClass){
+                this.classList.add('selected');
+                calSum();
+            }else{
+                this.classList.remove('selected');
+                calSum();
+            }
+        },false);
+    }
+    //带selected的item数组长度
+    function calSum() {
+        let nums=document.querySelectorAll('li.selected');
+        numEle.innerHTML=nums.length;
+    }
+
+    //span添加active
+    let st=null;
+    function changeSpanClass() {
+        clearTimeout(st);
+        numEle.classList.add('active');
+        //添加active 0.28s之后，移除之
+        st=setTimeout(function() {
+        numEle.classList.remove('active');
+      },280);
+    }
+})();
+</script>
+</html>

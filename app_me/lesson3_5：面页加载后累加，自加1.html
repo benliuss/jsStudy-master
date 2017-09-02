@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lesson 3_5</title>
+  <style>
+    body{
+      padding: 0;
+      color: green;
+      background: #fff;
+      text-align: center;
+      /*11111111*/
+      font: 700 25px/1.5 Arial;
+    }
+  </style>
+</head>
+<body>
+<script>
+  (function () {
+    var oBody=document.body;
+    var i=0;
+
+    setInterval(updateNum,1000);
+    updateNum();
+
+    function updateNum() {
+      oBody.innerHTML=++i;
+    }
+  })();
+</script>
+</body>
+</html>
